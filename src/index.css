@@ -224,3 +224,30 @@ h1 {
 .btn-buy {
   width: 40%;
 }
+
+/* alart box */
+.alarm-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 59;
+}
+.alret {
+  display: flex;
+  justify-content: center;
+  gap: 3.2rem;
+  padding: 2rem;
+  background-color: rgb(247, 61, 61);
+  align-items: center;
+}
+.alarm-text {
+  font-size: 1.8rem;
+  color: #fff;
+}
+.btn-ok {
+  width: 8rem;
+  border-radius: 5px;
+}

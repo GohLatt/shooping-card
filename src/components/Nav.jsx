@@ -8,8 +8,8 @@ function Nav() {
   const { selectProdcut, setSelectProduct } = useContext(Context);
   const [showCard, setShowCard] = useState(true);
   const [showSelect, setShowSelect] = useState(false);
-
   const [itemNo, setItemNo] = useState(0);
+  const [buy, setBuy] = useState(false);
 
   //for dom
 
@@ -23,6 +23,16 @@ function Nav() {
   };
   const decrease = () => {
     setItemNo(itemNo - 1);
+  };
+
+  const initial = () => {
+    setItemNo(0);
+  };
+
+  const btnhandle = () => {
+    setBuy(false);
+    setShowCard(true);
+    setShowSelect(false);
   };
 
   return (
@@ -46,7 +56,20 @@ function Nav() {
           selectProdcut={selectProdcut}
           setSelectProduct={setSelectProduct}
           decrease={decrease}
+          initial={initial}
+          setBuy={setBuy}
         />
+      )}
+
+      {buy && (
+        <div className="alarm-box">
+          <div className="alret">
+            <p className="alarm-text"> Thany you for buying</p>
+            <button onClick={btnhandle} className="btn btn-ok">
+              Ok
+            </button>
+          </div>
+        </div>
       )}
     </>
   );

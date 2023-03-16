@@ -5,6 +5,7 @@ const ACTION = {
   INCREASE: "increase",
   DECREASE: "decrease",
   DELETE: "delete",
+  ALL: "buyall",
 };
 
 function reducer(products, action) {
@@ -28,11 +29,20 @@ function reducer(products, action) {
     case ACTION.DELETE:
       return products.filter((p) => p.id !== action.payload.id);
 
+    case ACTION.ALL:
+      return (products = []);
+
     default:
       products;
   }
 }
-function SelectCard({ selectProdcut, setSelectProduct, decrease }) {
+function SelectCard({
+  selectProdcut,
+  setSelectProduct,
+  decrease,
+  initial,
+  setBuy,
+}) {
   const [products, dispatch] = useReducer(reducer, selectProdcut);
 
   const btnIncrease = (productId) => {
@@ -47,6 +57,13 @@ function SelectCard({ selectProdcut, setSelectProduct, decrease }) {
     dispatch({ type: ACTION.DELETE, payload: { id: productId } });
     decrease();
     setSelectProduct(selectProdcut.filter((p) => p.id !== productId));
+  };
+
+  const btnAll = () => {
+    dispatch({ type: ACTION.ALL });
+    setSelectProduct([]);
+    initial();
+    setBuy(true);
   };
 
   return (
@@ -90,7 +107,9 @@ function SelectCard({ selectProdcut, setSelectProduct, decrease }) {
             $ {products.map((p) => p.price).reduce((acc, val) => acc + val, 0)}
           </p>
         </div>
-        <button className="btn btn-buy">Buy all</button>
+        <button className="btn btn-buy" onClick={btnAll}>
+          Buy all
+        </button>
       </div>
     </div>
   );
